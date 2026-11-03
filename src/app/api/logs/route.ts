@@ -7,7 +7,7 @@ export async function GET(req: NextRequest) {
   const taskId = req.nextUrl.searchParams.get("task_id");
   const { logs } = await cols();
   const q = taskId ? { task_id: taskId } : {};
-  const timeline = await logs.find(q).sort("timestamp", -1).limit(200).toArray();
+  const timeline = await logs.find(q).sort("timestamp", -1).limit(500).toArray();
   return NextResponse.json({ logs: timeline, append_only: true });
 }
 
