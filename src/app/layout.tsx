@@ -21,10 +21,19 @@ export const metadata: Metadata = {
   icons: {
     icon: "https://z-cdn.chatglm.cn/z-ai/static/logo.svg",
   },
+  applicationName: "MemO",
   openGraph: {
-    title: "Aurelia Salon & Spa",
-    description: "Where beauty becomes ritual. Book online in 60 seconds.",
+    title: "MemO — Agent Task Ledger & Vector Audit Memory",
+    description:
+      "Append-only agent audit ledger with semantic search over MongoDB Atlas Vector Search.",
+    siteName: "MemO",
     type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "MemO — Agent Task Ledger & Vector Audit Memory",
+    description:
+      "Append-only agent audit ledger with semantic search over Atlas Vector Search.",
   },
 };
 
