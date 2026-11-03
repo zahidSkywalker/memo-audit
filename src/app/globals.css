@@ -155,3 +155,14 @@
 .memo-scroll::-webkit-scrollbar{width:8px;height:8px}
 .memo-scroll::-webkit-scrollbar-thumb{background:#3f3f46;border-radius:4px}
 .memo-scroll::-webkit-scrollbar-track{background:transparent}
+
+/* ---- MemO v2 ---- */
+.memo-dotgrid{background-image:radial-gradient(rgba(148,163,184,.06) 1px,transparent 1px);background-size:22px 22px}
+.memo-glow{box-shadow:0 0 0 1px rgba(16,185,129,.12),0 12px 48px -16px rgba(16,185,129,.25)}
+.memo-acc{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s cubic-bezier(.4,0,.2,1)}
+.memo-acc-open{grid-template-rows:1fr}
+.memo-acc>div{overflow:hidden;min-height:0}
+.memo-result>summary{cursor:pointer;list-style:none;user-select:none}
+.memo-result>summary::-webkit-details-marker{display:none}
+.memo-result[open]>summary .memo-caret{transform:rotate(90deg)}
+.memo-caret{display:inline-block;transition:transform .15s}
