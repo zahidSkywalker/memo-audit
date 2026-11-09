@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { cols, updateTaskStatus, STATUSES, authorized, TaskDoc } from "@/lib/memo";
+import { cols, updateTaskStatus, STATUSES, authorized, TaskDoc, deleteTaskEverywhere } from "@/lib/memo";
 
 export const dynamic = "force-dynamic";
 
@@ -22,6 +22,18 @@ export async function PATCH(req: NextRequest, ctx: { params: Promise<{ id: strin
     const task = await updateTaskStatus(id, status);
     if (!task) return NextResponse.json({ error: "not found" }, { status: 404 });
     return NextResponse.json({ task });
+  } catch (e) {
+    return NextResponse.json({ error: String(e) }, { status: 500 });
+  }
+}
+
+export async function DELETE(req: NextRequest, ctx: { params: Promise<{ id: string }> }) {
+  if (!authorized(req)) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
+  const { id } = await ctx.params;
+  try {
+    const r = await deleteTaskEverywhere(id);
+    if (!r.task) return NextResponse.json({ error: "not found" }, { status: 404 });
+    return NextResponse.json({ deleted: r });
   } catch (e) {
     return NextResponse.json({ error: String(e) }, { status: 500 });
   }
