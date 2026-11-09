@@ -419,16 +419,3 @@ export function authorized(req: Request): boolean {
   if (!key) return false; // fails closed
   return req.headers.get("x-memo-key") === key;
 }
-
-/* Temporary maintenance helper (to be removed after use): hard-delete a task
-   across task doc, execution logs, vector store, then regenerate manifest. */
-export async function deleteTaskEverywhere(
-  taskId: string
-): Promise<{ task: number; logs: number; vectors: number }> {
-  const { tasks, logs, vectors } = await cols();
-  const task = await tasks.deleteOne({ _id: taskId });
-  const l = await logs.deleteMany({ task_id: taskId });
-  const v = await vectors.deleteMany({ task_id: taskId });
-  await regenerateManifest();
-  return { task: task.deletedCount, logs: l.deletedCount, vectors: v.deletedCount };
-}
